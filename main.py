@@ -49,7 +49,7 @@ def create_post():
              text_error = "Your blog must include some content."
         if title_error != "" or text_error != "":
             return render_template('newpost.html', title_error=title_error, text_error=text_error,
-             title = blog_title, blog_text=blog_text)
+             blog_title = blog_title, blog_text=blog_text)
         new_post = Blog(blog_title, blog_text)
         db.session.add(new_post)
         db.session.commit()
