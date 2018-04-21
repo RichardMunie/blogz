@@ -2,19 +2,22 @@
 
 {% block content %}
     
-    {% if posts|length == 0 %}
-    <p>No Posts Yet!</p>
-    {% else %}
+    {% if posts %}
+    
 
         <ul>
             {% for post in posts %}
             <li>
-                <h3>{{post.title}}</h3>
+                <a href="/blog?id={{post.id}}"><h3>{{post.title}}</h3></a>
                 <p>{{post.body}}</p>
             </li>
             {% endfor %}
         </ul>
+        
+    {% else %}
 
+        <p>No Posts Yet!</p>
+    
     {% endif %}
 
 

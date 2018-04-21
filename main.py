@@ -22,15 +22,16 @@ class Blog(db.Model):
 def welcome():
     return render_template('welcome.html',title="Welcome to Build a Blog")
 
-@app.route('/blog', methods=['POST', 'GET'])
+@app.route('/blog', methods=['GET'])
 def index():
 
-    blog_id = request.args.get('param_name')
-    if blog_id != ""
-        post = Blog.query.filter_by(id=blog_id)
-        return render_template('postview.html', post)
+    if request.args.get('id'):
+        blog_id = request.args.get('id')
+        post = Blog.query.get(int(blog_id))
+        return render_template('postview.html', title="Build a Blog!", post=post)
+
     posts = Blog.query.all()
-    return render_template('blog.html',title="Build a Blog!", 
+    return render_template('blog.html', title="Build a Blog!", 
         posts=posts)
 
 
@@ -38,14 +39,24 @@ def index():
 def create_post():
 
     if request.method == 'POST':
+        title_error = ""
+        text_error = ""
         blog_title = request.form['title']
+        if blog_title == "":
+             title_error = "Your blog must include a title."
         blog_text = request.form['blog_text']
+        if blog_text == "":
+             text_error = "Your blog must include some content."
+        if title_error != "" or text_error != "":
+            return render_template('newpost.html', title_error=title_error, text_error=text_error,
+             title = blog_title, blog_text=blog_text)
         new_post = Blog(blog_title, blog_text)
         db.session.add(new_post)
         db.session.commit()
 
         posts = Blog.query.all()
-        return redirect('/blog')
+        last = posts[len(posts)-1]
+        return redirect('/blog?id=' + str(last.id)) 
 
     return render_template('newpost.html',title="Build a Blog!")
 

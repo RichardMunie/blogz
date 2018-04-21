@@ -1,25 +1,26 @@
 <!doctype html>
 <html>
     <head>
+            <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
         <link rel="stylesheet" media="screen" href="/style.css">
         <title>{{title}}</title>
         <h1>Build-A-Blog!</h1>
     </head>
-<body>
-    <nav>
-        <ul id="user-account">
-            <li><a href="/login">login</a></li>
-            <li><a href="/logout">logout</a></li>
-        </ul>
-        <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/blog">all posts</a></li>
-            <li><a href="/newpost">new post</a></li>
-        </ul>
-    </nav>
+    <body>
+        <nav>
+            #<ul id="user-account">
+                #<li><a href="/login">login</a></li>
+                #<li><a href="/logout">logout</a></li>
+            #</ul>
+            <ul>
+                <li><a href="/">home</a></li>
+                <li><a href="/blog">all posts</a></li>
+                <li><a href="/newpost">new post</a></li>
+            </ul>
+        </nav>
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-</body>
+    </body>
 </html>
