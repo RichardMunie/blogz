@@ -2,16 +2,16 @@
 <html>
     <head>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
-        <link rel="stylesheet" media="screen" href="/style.css">
+        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/normalize.css') }}">
         <title>{{title}}</title>
         <h1>Build-A-Blog!</h1>
     </head>
     <body>
         <nav>
-            <!--<ul id="user-account">
+            <ul id="user-account">
                 <li><a href="/login">login</a></li>
                 <li><a href="/logout">logout</a></li>
-            </ul>-->
+            </ul>
             <ul>
                 <li><a href="/">home</a></li>
                 <li><a href="/blog">all posts</a></li>
