@@ -49,9 +49,23 @@ def index():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
+        errors = False
         username = request.form['username']
         password = request.form['password']
         verify = request.form['verify']
+        if password != verify:
+            flash('password and verification do not match', "error")
+            errors=True
+        if password.replace(" ", "") == "":
+            flash('password needs to have something in it',"error")
+            errors=True
+        if username.replace(" ", "") == "":
+            flash('username needs to have something in it',"error")
+            errors=True
+        if errors == True:
+            return redirect('/signup')
+        
+        
         
         # todo validate
 
@@ -86,6 +100,7 @@ def login():
 @app.route('/logout')
 def logout():
     del session['username']
+    flash("logged out")
     return redirect('/blog')
 
 @app.route('/blog', methods=['GET'])
